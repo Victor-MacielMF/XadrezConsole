@@ -7,9 +7,13 @@ namespace XadrezConsole
     {
         static void Main(string[] args)
         {
-            Posicao Posicao = new Posicao(0,1);
+            int[] Coordenada = new int[] { 0, 1 }; 
+            Posicao Posicao = new Posicao(Coordenada);
 
             Console.WriteLine(Posicao);
+
+            Tabuleiro tabuleiro = new Tabuleiro();
+            Console.WriteLine(tabuleiro.ToString());
         }
     }
 }
