@@ -2,6 +2,7 @@
 using XadrezConsole.pecas;
 using XadrezConsole.tabuleiro;
 using XadrezConsole.tabuleiro.enums;
+using XadrezConsole.tabuleiro.exceptions;
 
 namespace XadrezConsole
 {
@@ -9,6 +10,9 @@ namespace XadrezConsole
     {
         static void Main(string[] args)
         {
+            try
+            {
+
             Tabuleiro Tabuleiro = new Tabuleiro();
             
             Torre Torre1 = new Torre(Cor.Preta, Tabuleiro);
@@ -20,8 +24,14 @@ namespace XadrezConsole
             Tabuleiro.ColocarPeca(Rei1, new Posicao(0,1));
             Tabuleiro.ColocarPeca(Rei2, new Posicao(1, 1));
             Tabuleiro.ColocarPeca(Torre1, new Posicao(2, 1));
-            Tabuleiro.ColocarPeca(Torre2, new Posicao(0, 2));
+            Tabuleiro.ColocarPeca(Torre2, new Posicao(0, -5));
             Tela.ImprimirTabuleiro(Tabuleiro);
+
+            }catch(TabuleiroException e)
+
+            {
+                Console.WriteLine("Erro: {0}", e.Message);
+            }
         }
     }
 }

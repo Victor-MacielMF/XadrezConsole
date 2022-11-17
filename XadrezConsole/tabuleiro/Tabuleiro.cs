@@ -27,6 +27,16 @@ namespace XadrezConsole.tabuleiro
         {
             return Pecas[posicao.Linha, posicao.Coluna];
         }
+        public void ColocarPeca(Peca peca, Posicao posicao)
+        {
+            if (ExistePeca(posicao))
+            {
+                throw new TabuleiroException("Já existe uma peça nesta posição.");
+            }
+
+            Pecas[posicao.Linha, posicao.Coluna] = peca;
+            peca.PosicaoAtual = posicao;
+        }
 
         public bool ExistePeca(Posicao posicao)
         {
@@ -45,13 +55,6 @@ namespace XadrezConsole.tabuleiro
         {
             return ((posicao.Linha >= 0 && posicao.Linha <= DimensaoDoTabuleiro[0]) &&
                     (posicao.Coluna >= 0 && posicao.Coluna <= DimensaoDoTabuleiro[1]));
-        }
-
-
-        public void ColocarPeca(Peca peca, Posicao posicao)
-        {
-            Pecas[posicao.Linha, posicao.Coluna] = peca;
-            peca.PosicaoAtual = posicao;
         }
     }
 }
