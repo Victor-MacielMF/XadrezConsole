@@ -22,11 +22,10 @@ namespace XadrezConsole.tabuleiro
             return Pecas[linha, coluna];
         }
 
-        public override string ToString()
+        public void ColocarPeca(Peca peca, Posicao posicao)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Este é um tabuleiro ").Append(DimensaoDoTabuleiro[0]).Append(" x ").Append(DimensaoDoTabuleiro[1]).Append(".").Append(Pecas);
-            return sb.ToString();
+            Pecas[posicao.Linha, posicao.Coluna] = peca;
+            peca.PosicaoAtual = posicao;
         }
     }
 }

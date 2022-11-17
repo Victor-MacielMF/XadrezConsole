@@ -5,14 +5,13 @@ namespace XadrezConsole.tabuleiro
 {
     internal class Peca
     {
-        public Posicao PosicaoDaPeca { get; set; }
+        public Posicao PosicaoAtual { get; set; }
         public Cor Cor { get; set; }
         public int QteMovimentos { get; protected set; }
         public Tabuleiro Tabuleiro { get; protected set; }
 
-        public Peca(Posicao posicaoDaPeca, Cor cor, Tabuleiro tabuleiro)
+        public Peca(Cor cor, Tabuleiro tabuleiro)
         {
-            PosicaoDaPeca = posicaoDaPeca;
             Cor = cor;
             Tabuleiro = tabuleiro;
         }
