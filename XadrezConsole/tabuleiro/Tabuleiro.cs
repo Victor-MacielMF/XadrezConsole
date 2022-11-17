@@ -42,6 +42,20 @@ namespace XadrezConsole.tabuleiro
             peca.PosicaoAtual = posicao;
         }
 
+        public Peca RetirarPeca(Posicao posicao)
+        {
+            if (!ExistePeca(posicao))
+            {
+                return null;
+            }
+
+            Peca Peca = PosicaoTabuleiro(posicao.Linha, posicao.Coluna);
+
+            Pecas[posicao.Linha, posicao.Coluna] = null;
+            Peca.PosicaoAtual = null;
+            return Peca;
+        }
+
         public bool ExistePeca(Posicao posicao)
         {
             ValidarPosicao(posicao);
