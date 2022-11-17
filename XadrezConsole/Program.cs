@@ -10,6 +10,7 @@ namespace XadrezConsole
     {
         static void Main(string[] args)
         {
+            
             try
             {
 
@@ -24,7 +25,7 @@ namespace XadrezConsole
             Tabuleiro.ColocarPeca(Rei1, new Posicao(0,1));
             Tabuleiro.ColocarPeca(Rei2, new Posicao(1, 1));
             Tabuleiro.ColocarPeca(Torre1, new Posicao(2, 1));
-            Tabuleiro.ColocarPeca(Torre2, new Posicao(0, -5));
+            Tabuleiro.ColocarPeca(Torre2, new Posicao(0, 0));
             Tela.ImprimirTabuleiro(Tabuleiro);
 
             }catch(TabuleiroException e)
@@ -32,6 +33,18 @@ namespace XadrezConsole
             {
                 Console.WriteLine("Erro: {0}", e.Message);
             }
+            /*
+
+
+            Tabuleiro Tabuleiro = new Tabuleiro();
+
+            Posicao pos = Tabuleiro.TextoParaPosicao('b', 8);
+
+            Console.Write("Linha:{0}\nColuna: {1}",pos.Linha, pos.Coluna);
+            
+            char var = 'a';
+            Console.Write();
+            */
         }
     }
 }
