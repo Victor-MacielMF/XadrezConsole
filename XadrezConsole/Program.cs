@@ -10,15 +10,28 @@ namespace XadrezConsole
     {
         static void Main(string[] args)
         {
-            
+
             try
             {
 
-            PartidaDeXadrez Partida = new PartidaDeXadrez();
+                PartidaDeXadrez Partida = new PartidaDeXadrez();
 
-            Tela.ImprimirTabuleiro(Partida.Tabuleiro);
+                while (!Partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(Partida.Tabuleiro);
 
-            }catch(TabuleiroException e)
+                    Console.Write("\nOrigem: ");
+                    Posicao Origem = Tela.LerPosicaoXadrez().TextoParaPosicao();
+
+                    Console.Write("Destino: ");
+                    Posicao Destino = Tela.LerPosicaoXadrez().TextoParaPosicao();
+
+                    Partida.ExecutaMovimento(Origem, Destino);
+
+                }
+            }
+            catch (TabuleiroException e)
 
             {
                 Console.WriteLine("Erro: {0}", e.Message);

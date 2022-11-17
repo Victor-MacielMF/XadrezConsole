@@ -40,6 +40,15 @@ namespace XadrezConsole
             Console.WriteLine(Colunas);
         }
 
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string Entrada = Console.ReadLine();
+            char Coluna = Entrada[0];
+            int Linha = int.Parse(Entrada[1] + "");
+
+            return new PosicaoXadrez(Coluna, Linha); 
+        }
+
         public static void ImprimirPeca(Peca peca)
         {
             if (peca.Cor == Cor.Branca)

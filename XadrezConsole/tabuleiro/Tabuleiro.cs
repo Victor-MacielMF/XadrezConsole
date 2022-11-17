@@ -18,10 +18,7 @@ namespace XadrezConsole.tabuleiro
             Pecas = new Peca[ValorPadrao, ValorPadrao];
         }
 
-        public Posicao TextoParaPosicao(char coluna, int linha)
-        {
-            return new Posicao(DimensaoDoTabuleiro[0] - linha, coluna - 'a');
-        }
+
         public Peca PosicaoTabuleiro(int linha, int coluna)
         {
             return Pecas[linha, coluna];
