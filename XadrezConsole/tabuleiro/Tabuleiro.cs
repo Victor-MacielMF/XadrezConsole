@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using XadrezConsole.tabuleiro.exceptions;
 
 namespace XadrezConsole.tabuleiro
 {
@@ -21,6 +22,31 @@ namespace XadrezConsole.tabuleiro
         {
             return Pecas[linha, coluna];
         }
+
+        public Peca PosicaoTabuleiro(Posicao posicao)
+        {
+            return Pecas[posicao.Linha, posicao.Coluna];
+        }
+
+        public bool ExistePeca(Posicao posicao)
+        {
+            ValidarPosicao(posicao);
+            return PosicaoTabuleiro(posicao) != null;
+        }
+        public void ValidarPosicao(Posicao posicao)
+        {
+            if (!PosicaoValida(posicao))
+            {
+                throw new TabuleiroException("Posição inválida.");
+            }
+        }
+
+        public bool PosicaoValida(Posicao posicao)
+        {
+            return ((posicao.Linha >= 0 && posicao.Linha <= DimensaoDoTabuleiro[0]) &&
+                    (posicao.Coluna >= 0 && posicao.Coluna <= DimensaoDoTabuleiro[1]));
+        }
+
 
         public void ColocarPeca(Peca peca, Posicao posicao)
         {
