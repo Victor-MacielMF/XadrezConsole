@@ -13,5 +13,11 @@ namespace XadrezConsole.pecas
         {
             return "T";
         }
+
+        public override bool[,] MovimentosPossiveis()
+        {
+            bool[,] PosicoesPossiveis = new bool[Tabuleiro.DimensaoDoTabuleiro[0], Tabuleiro.DimensaoDoTabuleiro[1]];
+            return PosicoesPossiveis;
+        }
     }
 }

@@ -13,5 +13,10 @@ namespace XadrezConsole.pecas
         {
             return "R";
         }
+
+        public override bool[,] MovimentosPossiveis()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

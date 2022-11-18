@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using XadrezConsole.pecas;
 using XadrezConsole.tabuleiro;
 using XadrezConsole.tabuleiro.enums;
@@ -15,17 +16,16 @@ namespace XadrezConsole
             {
 
                 PartidaDeXadrez Partida = new PartidaDeXadrez();
-
                 while (!Partida.Terminada)
                 {
                     Console.Clear();
                     Tela.ImprimirTabuleiro(Partida.Tabuleiro);
 
                     Console.Write("\nOrigem: ");
-                    Posicao Origem = Tela.LerPosicaoXadrez().TextoParaPosicao();
+                    Posicao Origem = Tela.LerPosicaoXadrez().TextoParaPosicao(Partida.Tabuleiro);
 
                     Console.Write("Destino: ");
-                    Posicao Destino = Tela.LerPosicaoXadrez().TextoParaPosicao();
+                    Posicao Destino = Tela.LerPosicaoXadrez().TextoParaPosicao(Partida.Tabuleiro);
 
                     Partida.ExecutaMovimento(Origem, Destino);
 

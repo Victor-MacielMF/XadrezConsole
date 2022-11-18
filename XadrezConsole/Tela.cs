@@ -2,7 +2,6 @@
 using XadrezConsole.tabuleiro;
 using System;
 using XadrezConsole.pecas;
-using XadrezConsole.tabuleiro;
 using XadrezConsole.tabuleiro.enums;
 using XadrezConsole.tabuleiro.exceptions;
 
@@ -31,6 +30,7 @@ namespace XadrezConsole
 
                     if (!PegouColunas)
                     {
+                        //Criar uma função para isto
                         Colunas += Convert.ToChar(j + 65) + " ";
                     }
                 }
@@ -43,10 +43,8 @@ namespace XadrezConsole
         public static PosicaoXadrez LerPosicaoXadrez()
         {
             string Entrada = Console.ReadLine();
-            char Coluna = Entrada[0];
-            int Linha = int.Parse(Entrada[1] + "");
 
-            return new PosicaoXadrez(Coluna, Linha); 
+            return new PosicaoXadrez(Entrada); 
         }
 
         public static void ImprimirPeca(Peca peca)

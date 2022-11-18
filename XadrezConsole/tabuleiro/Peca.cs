@@ -3,7 +3,7 @@ using XadrezConsole.tabuleiro.enums;
 
 namespace XadrezConsole.tabuleiro
 {
-    internal class Peca
+    abstract class Peca
     {
         public Posicao PosicaoAtual { get; set; }
         public Cor Cor { get; set; }
@@ -20,5 +20,7 @@ namespace XadrezConsole.tabuleiro
         {
             QteMovimentos++;
         }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
