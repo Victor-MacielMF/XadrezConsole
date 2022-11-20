@@ -15,7 +15,7 @@ namespace XadrezConsole
             string Colunas = "  ";
             for (int i = 0; i < tabuleiro.DimensaoDoTabuleiro[0]; i++)
             {
-                Console.Write(8 - i + " ");
+                Console.Write(tabuleiro.DimensaoDoTabuleiro[0] - i + " ");
                 for (int j = 0; j < tabuleiro.DimensaoDoTabuleiro[1]; j++)
                 {
                     if (tabuleiro.PosicaoTabuleiro(i, j) == null)
@@ -31,7 +31,7 @@ namespace XadrezConsole
                     if (!PegouColunas)
                     {
                         //Criar uma função para isto
-                        Colunas += Convert.ToChar(j + 65) + " ";
+                        Colunas += tabuleiro.NumeroParaPalavra(j) + " ";
                     }
                 }
                 PegouColunas = true;
@@ -42,7 +42,7 @@ namespace XadrezConsole
 
         public static PosicaoXadrez LerPosicaoXadrez()
         {
-            string Entrada = Console.ReadLine();
+            string Entrada = Console.ReadLine().ToUpper();
 
             return new PosicaoXadrez(Entrada); 
         }

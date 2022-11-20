@@ -71,5 +71,23 @@ namespace XadrezConsole.tabuleiro
             return ((posicao.Linha >= 0 && posicao.Linha <= DimensaoDoTabuleiro[0]) &&
                     (posicao.Coluna >= 0 && posicao.Coluna <= DimensaoDoTabuleiro[1]));
         }
+
+        /*
+        /Verificar no final do projeto a necessidade de migrar estes métodos para outra classe.
+        */
+        public char NumeroParaPalavra(int numero)
+        {
+            return Convert.ToChar(numero + 65);
+        }
+
+        public int PalavraParaBase64(char palavra)
+        {
+             return Convert.ToInt32(palavra);
+        }
+
+        public int ColunaParaBase64()
+        {
+            return DimensaoDoTabuleiro[1] + 65;
+        }
     }
 }
