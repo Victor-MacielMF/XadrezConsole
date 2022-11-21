@@ -30,7 +30,6 @@ namespace XadrezConsole
 
                     if (!PegouColunas)
                     {
-                        //Criar uma função para isto
                         Colunas += tabuleiro.NumeroParaPalavra(j) + " ";
                     }
                 }
