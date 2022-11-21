@@ -12,11 +12,11 @@ namespace XadrezConsole
         static void Main(string[] args)
         {
 
-            try
-            {
 
-                PartidaDeXadrez Partida = new PartidaDeXadrez();
-                while (!Partida.Terminada)
+            PartidaDeXadrez Partida = new PartidaDeXadrez();
+            while (!Partida.Terminada)
+            {
+                try
                 {
                     Console.Clear();
                     Tela.ImprimirTabuleiro(Partida.Tabuleiro);
@@ -25,38 +25,29 @@ namespace XadrezConsole
 
                     Console.Write("\nOrigem: ");
                     Posicao Origem = Tela.LerPosicaoXadrez().TextoParaPosicao(Partida.Tabuleiro);
-                     
+
                     Partida.ValidaPosicaoDeOrigem(Origem);
                     bool[,] MovimentosPossiveis = Partida.Tabuleiro.PosicaoTabuleiro(Origem).MovimentosPossiveis();
 
                     Console.Clear();
                     Tela.ImprimirTabuleiro(Partida.Tabuleiro, MovimentosPossiveis);
-                    
+
                     Console.Write("\nDestino: ");
                     Posicao Destino = Tela.LerPosicaoXadrez().TextoParaPosicao(Partida.Tabuleiro);
                     Partida.ValidarPosicaoDeDestino(Origem, Destino);
                     Partida.RealizaJogada(Origem, Destino);
-
                 }
+                catch (TabuleiroException e)
+                {
+                    Console.WriteLine("\n{0}\nAperte qualquer tecla para continuar...", e.Message);
+                    Console.ReadKey();
+                }
+
+                Console.Clear();
+                Tela.ImprimirTabuleiro(Partida.Tabuleiro);
             }
-            catch (TabuleiroException e)
-
-            {
-                Console.WriteLine("Erro: {0}", e.Message);
-                Console.ReadLine();
-            }
-            /*
 
 
-            Tabuleiro Tabuleiro = new Tabuleiro();
-
-            Posicao pos = Tabuleiro.TextoParaPosicao('b', 8);
-
-            Console.Write("Linha:{0}\nColuna: {1}",pos.Linha, pos.Coluna);
-            
-            char var = 'a';
-            Console.Write();
-            */
         }
     }
 }
