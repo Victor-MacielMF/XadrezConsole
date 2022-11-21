@@ -21,6 +21,12 @@ namespace XadrezConsole.tabuleiro
             QteMovimentos++;
         }
 
+        public bool PodeMover(Posicao posicao)
+        {
+            Peca Peca = Tabuleiro.PosicaoTabuleiro(posicao);
+            return Peca == null || Peca.Cor != Cor;
+        }
+
         public abstract bool[,] MovimentosPossiveis();
     }
 }
