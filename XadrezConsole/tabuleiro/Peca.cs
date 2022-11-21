@@ -23,10 +23,33 @@ namespace XadrezConsole.tabuleiro
 
         public bool PodeMover(Posicao posicao)
         {
+
             Peca Peca = Tabuleiro.PosicaoTabuleiro(posicao);
             return Peca == null || Peca.Cor != Cor;
         }
 
         public abstract bool[,] MovimentosPossiveis();
+
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] movimentosPossiveis = MovimentosPossiveis();
+            for (int i = 0; i < Tabuleiro.DimensaoDoTabuleiro[0]; i++)
+            {
+                for (int j = 0; j < Tabuleiro.DimensaoDoTabuleiro[1]; j++)
+                {
+                    if (movimentosPossiveis[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool PodeMoverPara(Posicao posicao)
+        {
+            return MovimentosPossiveis()[posicao.Linha, posicao.Coluna];
+        }
     }
 }

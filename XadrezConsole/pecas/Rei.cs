@@ -9,54 +9,55 @@ namespace XadrezConsole.pecas
         {
         }
 
-        public override bool[,] MovimentosPossiveis(Posicao posicao)
+        public override bool[,] MovimentosPossiveis()
         {
             bool[,] MovimentosPossiveis = new bool[Tabuleiro.DimensaoDoTabuleiro[0], Tabuleiro.DimensaoDoTabuleiro[1]];
 
-            posicao = new Posicao(0, 0);
-
-            Posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            Posicao posicao = new Posicao(0, 0);
+            
+            
+            //Refatorar esta parte
+            posicao.DefinirValores(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-
-            Posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha + 1, Posicao.Coluna -1] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-            Posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
+            posicao.DefinirValores(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
-                MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true; 
+                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true; 
             }
-
+            
             return MovimentosPossiveis;
         }
 

@@ -68,8 +68,11 @@ namespace XadrezConsole.tabuleiro
 
         public bool PosicaoValida(Posicao posicao)
         {
-            return ((posicao.Linha >= 0 && posicao.Linha <= DimensaoDoTabuleiro[0]) &&
-                    (posicao.Coluna >= 0 && posicao.Coluna <= DimensaoDoTabuleiro[1]));
+            if (posicao.Linha < 0 || posicao.Linha >= DimensaoDoTabuleiro[0] || posicao.Coluna < 0 || posicao.Coluna >= DimensaoDoTabuleiro[1])
+            {
+                return false;
+            }
+            return true;
         }
 
         /*
