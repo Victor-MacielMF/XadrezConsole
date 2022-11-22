@@ -129,6 +129,7 @@ namespace XadrezConsole.pecas
 
             InserirNovaPeca("B8", new Torre(Cor.Preta, Tabuleiro));
             InserirNovaPeca("A8", new Rei(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D4", new Dama(Cor.Branca, Tabuleiro));
 
         }
 
