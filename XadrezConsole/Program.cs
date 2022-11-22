@@ -36,7 +36,7 @@ namespace XadrezConsole
                 }
                 catch (TabuleiroException e)
                 {
-                    Console.WriteLine("\n{0}\nAperte qualquer tecla para continuar...", e.Message);
+                    Console.WriteLine("\n{0}\n\nAperte qualquer tecla para continuar...", e.Message);
                     Console.ReadKey();
                 }
 

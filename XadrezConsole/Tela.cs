@@ -15,6 +15,10 @@ namespace XadrezConsole
             Tela.ImprimirTabuleiro(partida.Tabuleiro);
             ImprimirPecasCapturadas(partida);
             Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
+            if (partida.PartidaEstaEmXeque)
+            {
+                Console.WriteLine("\nVOCÊ ESTÁ EM XEQUE!");
+            }
         }
 
         public static void ImprimirPartida(PartidaDeXadrez partida, bool[,] movimentosPossiveis)
@@ -23,6 +27,10 @@ namespace XadrezConsole
             Tela.ImprimirTabuleiro(partida.Tabuleiro, movimentosPossiveis);
             ImprimirPecasCapturadas(partida);
             Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
+            if (partida.PartidaEstaEmXeque)
+            {
+                Console.WriteLine("\nVOCÊ ESTÁ EM XEQUE!");
+            }
         }
 
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
