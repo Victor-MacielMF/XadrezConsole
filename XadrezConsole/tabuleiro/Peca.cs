@@ -1,5 +1,4 @@
-﻿using System.Text;
-using XadrezConsole.tabuleiro.enums;
+﻿using XadrezConsole.tabuleiro.enums;
 
 namespace XadrezConsole.tabuleiro
 {

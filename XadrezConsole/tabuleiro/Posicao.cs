@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace XadrezConsole.tabuleiro
+﻿namespace XadrezConsole.tabuleiro
 {
     internal class Posicao
     {

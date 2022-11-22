@@ -1,5 +1,4 @@
-﻿using System.Text;
-using XadrezConsole.tabuleiro.exceptions;
+﻿using XadrezConsole.tabuleiro.exceptions;
 
 namespace XadrezConsole.tabuleiro
 {

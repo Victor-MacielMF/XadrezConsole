@@ -1,9 +1,7 @@
 ﻿using System.Text;
 using XadrezConsole.tabuleiro;
-using System;
 using XadrezConsole.pecas;
 using XadrezConsole.tabuleiro.enums;
-using XadrezConsole.tabuleiro.exceptions;
 
 namespace XadrezConsole
 {
