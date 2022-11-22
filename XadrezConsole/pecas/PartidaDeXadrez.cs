@@ -66,8 +66,20 @@ namespace XadrezConsole.pecas
             {
                 PartidaEstaEmXeque = true;
             }
-            Turno++;
-            MudaJogador();
+            else
+            {
+                PartidaEstaEmXeque = false;
+            }
+
+            if (JogadorEstaEmXequeMate(CorAdversaria(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
 
         public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
@@ -80,7 +92,7 @@ namespace XadrezConsole.pecas
                 PecasCaputuradas.Remove(pecaCapturada);
             }
             Tabuleiro.ColocarPeca(pecaQueMoveu, origem);
-            
+
         }
 
         public Peca ExecutaMovimento(Posicao Origem, Posicao Destino)
@@ -111,22 +123,12 @@ namespace XadrezConsole.pecas
 
         private void ColocarPecas()
         {
-            InserirNovaPeca("C1", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("D3", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("C2", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E2", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E1", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("C3", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E3", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("H7", new Torre(Cor.Branca, Tabuleiro));
             InserirNovaPeca("D1", new Rei(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C1", new Torre(Cor.Branca, Tabuleiro));
 
-            InserirNovaPeca("D6", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("C8", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("D7", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("C7", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("E7", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("E8", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("D8", new Rei(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("B8", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("A8", new Rei(Cor.Preta, Tabuleiro));
 
         }
 
@@ -170,7 +172,8 @@ namespace XadrezConsole.pecas
             if (corAtual == Cor.Preta)
             {
                 return Cor.Branca;
-            }else
+            }
+            else
             {
                 return Cor.Preta;
             }
@@ -203,6 +206,42 @@ namespace XadrezConsole.pecas
 
             return false;
         }
-    }  
+
+        public bool JogadorEstaEmXequeMate(Cor cor)
+        {
+            if (!JogadorEstaEmXeque(cor))
+            {
+                return false;
+            }
+
+            foreach (Peca peca in PecasEmJogoCor(cor))
+            {
+                bool[,] MovimentosPossiveis = peca.MovimentosPossiveis();
+                for (int i = 0; i < Tabuleiro.DimensaoDoTabuleiro[0]; i++)
+                {
+                    for (int j = 0; j < Tabuleiro.DimensaoDoTabuleiro[1]; j++)
+                    {
+                        if (MovimentosPossiveis[i, j])
+                        {
+                            Posicao Origem = peca.PosicaoAtual;
+                            Posicao Destino = new Posicao(i, j);
+                            Peca PecaCapturada = ExecutaMovimento(Origem, Destino);
+
+                            bool TesteXequeMate = JogadorEstaEmXeque(cor);
+
+                            DesfazMovimento(Origem, Destino, PecaCapturada);
+
+                            if (!TesteXequeMate)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
 
 }

@@ -14,10 +14,17 @@ namespace XadrezConsole
             Console.Clear();
             Tela.ImprimirTabuleiro(partida.Tabuleiro);
             ImprimirPecasCapturadas(partida);
-            Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
-            if (partida.PartidaEstaEmXeque)
+            if (!partida.Terminada)
             {
-                Console.WriteLine("\nVOCÊ ESTÁ EM XEQUE!");
+                Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
+                if (partida.PartidaEstaEmXeque)
+                {
+                    Console.WriteLine("\nVOCÊ ESTÁ EM XEQUE!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n\nTurno: {0}\n\nXEQUEMATE!\nVencedor: {1}", partida.Turno, partida.JogadorAtual);
             }
         }
 
@@ -53,7 +60,7 @@ namespace XadrezConsole
             }
             Console.WriteLine(Colunas);
         }
-        
+
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] movimentosPoossiveis)
         {
             ConsoleColor FundoOriginal = Console.BackgroundColor;

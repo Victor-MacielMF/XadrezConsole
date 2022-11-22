@@ -12,7 +12,6 @@ namespace XadrezConsole
         static void Main(string[] args)
         {
 
-
             PartidaDeXadrez Partida = new PartidaDeXadrez();
             while (!Partida.Terminada)
             {
@@ -41,10 +40,11 @@ namespace XadrezConsole
                 }
 
                 Console.Clear();
-                Tela.ImprimirTabuleiro(Partida.Tabuleiro);
+                Tela.ImprimirPartida(Partida);
             }
 
-
+            Console.WriteLine("\nAperte qualquer tecla para continuar...");
+            Console.ReadKey();
         }
     }
 }
