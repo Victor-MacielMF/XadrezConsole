@@ -9,6 +9,14 @@ namespace XadrezConsole
 {
     class Tela
     {
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            Console.Clear();
+            Tela.ImprimirTabuleiro(partida.Tabuleiro);
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
+        }
+
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
             bool PegouColunas = false;
@@ -29,7 +37,7 @@ namespace XadrezConsole
             }
             Console.WriteLine(Colunas);
         }
-
+        
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] movimentosPoossiveis)
         {
             ConsoleColor FundoOriginal = Console.BackgroundColor;
@@ -54,9 +62,8 @@ namespace XadrezConsole
                     Console.BackgroundColor = FundoOriginal;
                 }
                 PegouColunas = true;
-                Console.WriteLine();
             }
-            Console.WriteLine(Colunas);
+            Console.WriteLine("\n{0}",Colunas);
         }
 
         public static PosicaoXadrez LerPosicaoXadrez()
@@ -89,6 +96,30 @@ namespace XadrezConsole
 
                 Console.Write(" ");
             }
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.Write("\nPeças capturadas:\nBrancas: ");
+            ImprimirConjunto(partida.PecasCapturadasCor(Cor.Branca));
+            Console.Write("\nPretas: ");
+            ConsoleColor OriginalColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ImprimirConjunto(partida.PecasCapturadasCor(Cor.Preta));
+            Console.ForegroundColor = OriginalColor;
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> pecas)
+        {
+            StringBuilder sb = new StringBuilder().Append("[  ");
+            foreach (Peca peca in pecas)
+            {
+                sb.Append(peca).Append(" ");
+            }
+
+            sb.Append(" ]");
+
+            Console.Write(sb.ToString());
         }
 
     }

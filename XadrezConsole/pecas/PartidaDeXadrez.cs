@@ -89,12 +89,12 @@ namespace XadrezConsole.pecas
             InserirNovaPeca("E1", new Torre(Cor.Branca, Tabuleiro));
             InserirNovaPeca("D1", new Rei(Cor.Branca, Tabuleiro));
 
-            InserirNovaPeca("C8", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("D7", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("C7", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E7", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E8", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("D8", new Rei(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C8", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D7", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("C7", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("E7", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("E8", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D8", new Rei(Cor.Preta, Tabuleiro));
 
         }
 
