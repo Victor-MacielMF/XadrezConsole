@@ -10,6 +10,8 @@ namespace XadrezConsole.pecas
         public int Turno { get; private set; }
         public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
+        public HashSet<Peca> PecasEmJogo { get; set; }
+        public HashSet<Peca> PecasCaputuradas { get; set; }
 
         public PartidaDeXadrez()
         {
@@ -17,6 +19,8 @@ namespace XadrezConsole.pecas
             Turno = 1;
             JogadorAtual = Cor.Branca;
             Terminada = false;
+            PecasEmJogo = new HashSet<Peca>();
+            PecasCaputuradas = new HashSet<Peca>();
             ColocarPecas();
         }
 
@@ -58,6 +62,10 @@ namespace XadrezConsole.pecas
             Peca.IncrementarQtdeMovimentos();
             Peca PecaCapturada = Tabuleiro.RetirarPeca(Destino);
             Tabuleiro.ColocarPeca(Peca, Destino);
+            if (PecaCapturada != null)
+            {
+                PecasCaputuradas.Add(PecaCapturada);
+            }
         }
 
         public void MudaJogador()
@@ -74,20 +82,56 @@ namespace XadrezConsole.pecas
 
         private void ColocarPecas()
         {
-            Tabuleiro.ColocarPeca(new Rei(Cor.Branca, Tabuleiro), new PosicaoXadrez("C1").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Branca, Tabuleiro), new PosicaoXadrez("C2").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Rei(Cor.Branca, Tabuleiro), new PosicaoXadrez("D2").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Branca, Tabuleiro), new PosicaoXadrez("E2").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Branca, Tabuleiro), new PosicaoXadrez("E1").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Rei(Cor.Branca, Tabuleiro), new PosicaoXadrez("D1").TextoParaPosicao(Tabuleiro));
+            InserirNovaPeca("C1", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D2", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C2", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E2", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E1", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D1", new Rei(Cor.Branca, Tabuleiro));
 
-            Tabuleiro.ColocarPeca(new Rei(Cor.Preta, Tabuleiro), new PosicaoXadrez("C7").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Preta, Tabuleiro), new PosicaoXadrez("C8").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Rei(Cor.Preta, Tabuleiro), new PosicaoXadrez("D7").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Preta, Tabuleiro), new PosicaoXadrez("E7").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Torre(Cor.Preta, Tabuleiro), new PosicaoXadrez("E8").TextoParaPosicao(Tabuleiro));
-            Tabuleiro.ColocarPeca(new Rei(Cor.Preta, Tabuleiro), new PosicaoXadrez("D8").TextoParaPosicao(Tabuleiro));
+            InserirNovaPeca("C8", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D7", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C7", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E7", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E8", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D8", new Rei(Cor.Branca, Tabuleiro));
 
         }
-    }
+
+        private void InserirNovaPeca(string posicao, Peca peca)
+        {
+            Tabuleiro.ColocarPeca(peca, new PosicaoXadrez(posicao).TextoParaPosicao(Tabuleiro));
+            PecasEmJogo.Add(peca);
+        }
+
+        public HashSet<Peca> PecasCapturadasCor(Cor cor)
+        {
+            HashSet<Peca> Auxiliar = new HashSet<Peca>();
+            foreach (Peca peca in PecasCaputuradas)
+            {
+                if (peca.Cor == cor)
+                {
+                    Auxiliar.Add(peca);
+                }
+            }
+
+            return Auxiliar;
+        }
+
+        public HashSet<Peca> PecasEmJogoCor(Cor cor)
+        {
+            HashSet<Peca> Auxiliar = new HashSet<Peca>();
+            foreach (Peca peca in PecasEmJogo)
+            {
+                if (peca.Cor == cor)
+                {
+                    Auxiliar.Add(peca);
+                }
+            }
+            Auxiliar.ExceptWith(PecasCapturadasCor(cor));
+
+            return Auxiliar;
+        }
+    }  
+
 }
