@@ -13,55 +13,44 @@ namespace XadrezConsole.pecas
         {
             bool[,] MovimentosPossiveis = new bool[Tabuleiro.DimensaoDoTabuleiro[0], Tabuleiro.DimensaoDoTabuleiro[1]];
 
-            Posicao posicao = new Posicao(0, 0);
+            Posicao Posicao = new Posicao(0, 0);
 
-            //Refatorar esta parte
-            posicao.DefinirValores(PosicaoAtual.Linha - 1, PosicaoAtual.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.ExistePeca(posicao))
+            //Aqui estou armazenando todas as 4 direções possiveis que a torre pode fazer.
+            int[,] TodosMovimentosPeca = new int[4, 2]
                 {
-                    break;
-                }
+                    { PosicaoAtual.Linha - 1, PosicaoAtual.Coluna }, { PosicaoAtual.Linha + 1, PosicaoAtual.Coluna },
+                    { PosicaoAtual.Linha, PosicaoAtual.Coluna + 1 }, { PosicaoAtual.Linha, PosicaoAtual.Coluna - 1 }
+                };
 
-                posicao.Linha -= 1;
-            }
-
-            posicao.DefinirValores(PosicaoAtual.Linha + 1, PosicaoAtual.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
+            for (int i = 0; i < TodosMovimentosPeca.GetLength(0); i++)
             {
-                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.ExistePeca(posicao))
+                Posicao.DefinirValores(TodosMovimentosPeca[i, 0], TodosMovimentosPeca[i, 1]);
+                while (Tabuleiro.PosicaoValida(Posicao) && PodeMover(Posicao))
                 {
-                    break;
+                    MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true;
+
+                    if (Tabuleiro.ExistePeca(Posicao))
+                    {
+                        break;
+                    }
+
+                    //Este switch é para fazer a torre percorrer todos os caminhos, caso o if acima não o faça parar.
+                    switch (i)
+                    {
+                        case 0:
+                            Posicao.Linha -= 1;
+                            break;
+                        case 1:
+                            Posicao.Linha += 1;
+                            break;
+                        case 2:
+                            Posicao.Coluna += 1;
+                            break;
+                        case 3:
+                            Posicao.Coluna -= 1;
+                            break;
+                    }
                 }
-
-                posicao.Linha += 1;
-            }
-
-            posicao.DefinirValores(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.ExistePeca(posicao))
-                {
-                    break;
-                }
-
-                posicao.Coluna += 1;
-            }
-
-            posicao.DefinirValores(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                MovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.ExistePeca(posicao))
-                {
-                    break;
-                }
-
-                posicao.Coluna -= 1;
             }
 
             return MovimentosPossiveis;
