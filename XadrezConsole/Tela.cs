@@ -17,6 +17,14 @@ namespace XadrezConsole
             Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
         }
 
+        public static void ImprimirPartida(PartidaDeXadrez partida, bool[,] movimentosPossiveis)
+        {
+            Console.Clear();
+            Tela.ImprimirTabuleiro(partida.Tabuleiro, movimentosPossiveis);
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine("\n\nTurno: {0}\nAguardando jogada: {1}", partida.Turno, partida.JogadorAtual);
+        }
+
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
             bool PegouColunas = false;
@@ -62,8 +70,9 @@ namespace XadrezConsole
                     Console.BackgroundColor = FundoOriginal;
                 }
                 PegouColunas = true;
+                Console.WriteLine();
             }
-            Console.WriteLine("\n{0}",Colunas);
+            Console.WriteLine(Colunas);
         }
 
         public static PosicaoXadrez LerPosicaoXadrez()
