@@ -84,26 +84,66 @@ namespace XadrezConsole.pecas
 
         public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
-            Peca pecaQueMoveu = Tabuleiro.RetirarPeca(destino);
-            pecaQueMoveu.DecrementarQtdeMovimentos();
+            Peca PecaQueMoveu = Tabuleiro.RetirarPeca(destino);
+            PecaQueMoveu.DecrementarQtdeMovimentos();
             if (pecaCapturada != null)
             {
                 Tabuleiro.ColocarPeca(pecaCapturada, destino);
                 PecasCaputuradas.Remove(pecaCapturada);
             }
-            Tabuleiro.ColocarPeca(pecaQueMoveu, origem);
+            Tabuleiro.ColocarPeca(PecaQueMoveu, origem);
+
+            // #jogadaespecial roque pequeno
+            if (PecaQueMoveu is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tabuleiro.RetirarPeca(destinoT);
+                T.IncrementarQtdeMovimentos();
+                Tabuleiro.ColocarPeca(T, origemT);
+            }
+
+            // #jogadaespecial roque grande
+            if (PecaQueMoveu is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tabuleiro.RetirarPeca(destinoT);
+                T.IncrementarQtdeMovimentos();
+                Tabuleiro.ColocarPeca(T, origemT);
+            }
 
         }
 
-        public Peca ExecutaMovimento(Posicao Origem, Posicao Destino)
+        public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
-            Peca Peca = Tabuleiro.RetirarPeca(Origem);
+            Peca Peca = Tabuleiro.RetirarPeca(origem);
             Peca.IncrementarQtdeMovimentos();
-            Peca PecaCapturada = Tabuleiro.RetirarPeca(Destino);
-            Tabuleiro.ColocarPeca(Peca, Destino);
+            Peca PecaCapturada = Tabuleiro.RetirarPeca(destino);
+            Tabuleiro.ColocarPeca(Peca, destino);
             if (PecaCapturada != null)
             {
                 PecasCaputuradas.Add(PecaCapturada);
+            }
+
+            // #jogadaespecial roque pequeno
+            if (Peca is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tabuleiro.RetirarPeca(origemT);
+                T.IncrementarQtdeMovimentos();
+                Tabuleiro.ColocarPeca(T, destinoT);
+            }
+
+            // #jogadaespecial roque grande
+            if (Peca is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha,origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tabuleiro.RetirarPeca(origemT);
+                T.IncrementarQtdeMovimentos();
+                Tabuleiro.ColocarPeca(T, destinoT);
             }
 
             return PecaCapturada;
@@ -123,13 +163,13 @@ namespace XadrezConsole.pecas
 
         private void ColocarPecas()
         {
-            InserirNovaPeca("A1", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("B1", new Cavalo(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("C1", new Bispo(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("D1", new Dama(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("E1", new Rei(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("F1", new Bispo(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("G1", new Cavalo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("A1", new Torre(Cor.Preta, Tabuleiro));
+           // InserirNovaPeca("B1", new Cavalo(Cor.Branca, Tabuleiro));
+           // InserirNovaPeca("C1", new Bispo(Cor.Branca, Tabuleiro));
+           // InserirNovaPeca("D1", new Dama(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E1", new Rei(Cor.Branca, Tabuleiro, this));
+           // InserirNovaPeca("F1", new Bispo(Cor.Branca, Tabuleiro));
+           // InserirNovaPeca("G1", new Cavalo(Cor.Branca, Tabuleiro));
             InserirNovaPeca("H1", new Torre(Cor.Branca, Tabuleiro));
             InserirNovaPeca("A2", new Peao(Cor.Branca, Tabuleiro));
             InserirNovaPeca("B2", new Peao(Cor.Branca, Tabuleiro));
@@ -143,12 +183,12 @@ namespace XadrezConsole.pecas
 
 
             InserirNovaPeca("A8", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("B8", new Cavalo(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("C8", new Bispo(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("D8", new Dama(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("E8", new Rei(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("F8", new Bispo(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("G8", new Cavalo(Cor.Preta, Tabuleiro));
+          //  InserirNovaPeca("B8", new Cavalo(Cor.Preta, Tabuleiro));
+          //  InserirNovaPeca("C8", new Bispo(Cor.Preta, Tabuleiro));
+          //  InserirNovaPeca("D8", new Dama(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("E8", new Rei(Cor.Preta, Tabuleiro, this));
+           // InserirNovaPeca("F8", new Bispo(Cor.Preta, Tabuleiro));
+           // InserirNovaPeca("G8", new Cavalo(Cor.Preta, Tabuleiro));
             InserirNovaPeca("H8", new Torre(Cor.Preta, Tabuleiro));
             InserirNovaPeca("A7", new Peao(Cor.Preta, Tabuleiro));
             InserirNovaPeca("B7", new Peao(Cor.Preta, Tabuleiro));
