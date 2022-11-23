@@ -12,6 +12,7 @@ namespace XadrezConsole.pecas
             bool[,] MovimentosPossiveis = new bool[Tabuleiro.DimensaoDoTabuleiro[0], Tabuleiro.DimensaoDoTabuleiro[1]];
             Posicao PosicaoMovimento = new Posicao(0, 0);
             Posicao PosicaoCaptura = new Posicao(0, 0);
+            Posicao PosicaoPassant = new Posicao(0, 0);
 
             int[,] TodosMovimentosPadrao = new int[4, 2]
             {
@@ -30,6 +31,14 @@ namespace XadrezConsole.pecas
                 {PosicaoAtual.Linha + 1, PosicaoAtual.Coluna -1}, //Tem peca inimiga à esquerda da Preta
                 {PosicaoAtual.Linha + 1, PosicaoAtual.Coluna + 1} // Tem peca inimiga à direita da Preta
             };
+            int[,] TodosMovimentosPassant = new int[4, 2]
+            {
+                { 3, PosicaoAtual.Coluna - 1 }, //Tem peca inimiga à esquerda da branca
+                { 3, PosicaoAtual.Coluna + 1 }, // Tem peca inimiga à direita da branca
+
+                { 4, PosicaoAtual.Coluna - 1 }, //Tem peca inimiga à esquerda da Preta
+                { 4, PosicaoAtual.Coluna + 1 } // Tem peca inimiga à direita da Preta
+            };
 
             //Aqui eu armazeno onde inicia e onde acaba  o array para delimitar as duas matrizes= TodosMovimentosPadrao & TodosMovimentosCaptura no for abaixo.
             int[] BrancaOuPreta = { Cor == Cor.Branca ? 0 : 2, Cor == Cor.Branca ? 1 : 3 };
@@ -39,6 +48,7 @@ namespace XadrezConsole.pecas
             {
                 PosicaoMovimento.DefinirValores(TodosMovimentosPadrao[i, 0], TodosMovimentosPadrao[i, 1]);
                 PosicaoCaptura.DefinirValores(TodosMovimentosCaptura[i, 0], TodosMovimentosCaptura[i, 1]);
+                PosicaoPassant.DefinirValores(TodosMovimentosPassant[i, 0], TodosMovimentosPassant[i, 1]);
 
                 Peca pecaCaptura = null;
 
@@ -61,6 +71,15 @@ namespace XadrezConsole.pecas
                 {
                     MovimentosPossiveis[PosicaoCaptura.Linha, PosicaoCaptura.Coluna] = true;
                 }
+
+                if (Tabuleiro.PosicaoValida(PosicaoPassant))
+                {
+                    Peca PecaPassant = Tabuleiro.PosicaoTabuleiro(PosicaoPassant);
+                    if (PecaPassant != null && PecaPassant.Cor != Cor)
+                    {
+                        MovimentosPossiveis[PosicaoCaptura.Linha, PosicaoCaptura.Coluna] = true;
+                    }
+                }
             }
 
             return MovimentosPossiveis;
@@ -77,3 +96,18 @@ namespace XadrezConsole.pecas
         }
     }
 }
+
+/*                if (PosicaoAtual.Linha == 3)
+                {
+                    Posicao esquerda = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna - 1);
+                    if (Tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tabuleiro.PosicaoTabuleiro(esquerda) == Partida.PecaVulneravelPassant)
+                    {
+                        MovimentosPossiveis[esquerda.Linha - 1, esquerda.Coluna] = true;
+                    }
+                    Posicao direita = new Posicao(PosicaoAtual.Linha, PosicaoAtual.Coluna + 1);
+                    if (Tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && Tabuleiro.PosicaoTabuleiro(direita) == Partida.PecaVulneravelPassant)
+                    {
+                        MovimentosPossiveis[direita.Linha - 1, direita.Coluna] = true;
+                    }
+                }
+*/

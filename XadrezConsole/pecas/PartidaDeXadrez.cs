@@ -13,6 +13,7 @@ namespace XadrezConsole.pecas
         public HashSet<Peca> PecasEmJogo { get; set; }
         public HashSet<Peca> PecasCaputuradas { get; set; }
         public bool PartidaEstaEmXeque { get; private set; }
+        public Peca PecaVulneravelPassant { get; private set; }
 
         public PartidaDeXadrez()
         {
@@ -113,6 +114,21 @@ namespace XadrezConsole.pecas
                 Tabuleiro.ColocarPeca(T, origemT);
             }
 
+            // Passant
+            if (PecaQueMoveu is Peao && pecaCapturada == PecaVulneravelPassant && destino.Coluna != origem.Coluna)
+            {
+                Posicao SofreuPassant;
+                if (PecaQueMoveu.Cor == Cor.Branca)
+                {
+                    SofreuPassant = new Posicao(destino.Linha + 1, destino.Coluna);
+                }
+                else
+                {
+                    SofreuPassant = new Posicao(destino.Linha - 1, destino.Coluna);
+                }
+                Tabuleiro.ColocarPeca(PecaVulneravelPassant, SofreuPassant);
+            }
+
         }
 
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
@@ -146,6 +162,24 @@ namespace XadrezConsole.pecas
                 Tabuleiro.ColocarPeca(T, destinoT);
             }
 
+            // Passant
+            Posicao SofreuPassant = null;
+            if (Peca is Peao && PecaCapturada == null && destino.Coluna != origem.Coluna)
+            {
+                if (Peca.Cor == Cor.Branca)
+                {
+                    SofreuPassant = new Posicao(destino.Linha + 1, destino.Coluna);
+                }
+                else
+                {
+                    SofreuPassant = new Posicao(destino.Linha - 1, destino.Coluna);
+                }
+                PecaCapturada = Tabuleiro.RetirarPeca(SofreuPassant);
+                PecasCaputuradas.Add(PecaCapturada);
+            }
+
+            PecaVulneravelPassant = SofreuPassant != null ? PecaCapturada : null;
+
             return PecaCapturada;
         }
 
@@ -164,12 +198,12 @@ namespace XadrezConsole.pecas
         private void ColocarPecas()
         {
             InserirNovaPeca("A1", new Torre(Cor.Preta, Tabuleiro));
-           // InserirNovaPeca("B1", new Cavalo(Cor.Branca, Tabuleiro));
-           // InserirNovaPeca("C1", new Bispo(Cor.Branca, Tabuleiro));
-           // InserirNovaPeca("D1", new Dama(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("B1", new Cavalo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C1", new Bispo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D1", new Dama(Cor.Branca, Tabuleiro));
             InserirNovaPeca("E1", new Rei(Cor.Branca, Tabuleiro, this));
-           // InserirNovaPeca("F1", new Bispo(Cor.Branca, Tabuleiro));
-           // InserirNovaPeca("G1", new Cavalo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("F1", new Bispo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("G1", new Cavalo(Cor.Branca, Tabuleiro));
             InserirNovaPeca("H1", new Torre(Cor.Branca, Tabuleiro));
             InserirNovaPeca("A2", new Peao(Cor.Branca, Tabuleiro));
             InserirNovaPeca("B2", new Peao(Cor.Branca, Tabuleiro));
@@ -183,12 +217,12 @@ namespace XadrezConsole.pecas
 
 
             InserirNovaPeca("A8", new Torre(Cor.Preta, Tabuleiro));
-          //  InserirNovaPeca("B8", new Cavalo(Cor.Preta, Tabuleiro));
-          //  InserirNovaPeca("C8", new Bispo(Cor.Preta, Tabuleiro));
-          //  InserirNovaPeca("D8", new Dama(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("B8", new Cavalo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("C8", new Bispo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D8", new Dama(Cor.Preta, Tabuleiro));
             InserirNovaPeca("E8", new Rei(Cor.Preta, Tabuleiro, this));
-           // InserirNovaPeca("F8", new Bispo(Cor.Preta, Tabuleiro));
-           // InserirNovaPeca("G8", new Cavalo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("F8", new Bispo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("G8", new Cavalo(Cor.Preta, Tabuleiro));
             InserirNovaPeca("H8", new Torre(Cor.Preta, Tabuleiro));
             InserirNovaPeca("A7", new Peao(Cor.Preta, Tabuleiro));
             InserirNovaPeca("B7", new Peao(Cor.Preta, Tabuleiro));
