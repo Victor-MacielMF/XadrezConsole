@@ -56,7 +56,7 @@ namespace XadrezConsole
                 PegouColunas = true;
                 Console.WriteLine();
             }
-            Console.WriteLine(Colunas);
+            Console.WriteLine(Colunas.ToLower());
         }
 
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] movimentosPoossiveis)
@@ -85,7 +85,7 @@ namespace XadrezConsole
                 PegouColunas = true;
                 Console.WriteLine();
             }
-            Console.WriteLine(Colunas);
+            Console.WriteLine(Colunas.ToLower());
         }
 
         public static PosicaoXadrez LerPosicaoXadrez()

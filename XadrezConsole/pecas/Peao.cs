@@ -5,7 +5,11 @@ namespace XadrezConsole.pecas
 {
     internal class Peao : Peca
     {
-        public Peao(Cor cor, Tabuleiro tabuleiro) : base(cor, tabuleiro) { }
+        private PartidaDeXadrez Partida;
+        public Peao(Cor cor, Tabuleiro tabuleiro, PartidaDeXadrez partida) : base(cor, tabuleiro)
+        {
+            Partida = partida;
+        }
 
         public override bool[,] MovimentosPossiveis()
         {
@@ -74,8 +78,9 @@ namespace XadrezConsole.pecas
 
                 if (Tabuleiro.PosicaoValida(PosicaoPassant))
                 {
+                    Peca PecaTabuleiroPassant = Partida.PecaVulneravelPassant;
                     Peca PecaPassant = Tabuleiro.PosicaoTabuleiro(PosicaoPassant);
-                    if (PecaPassant != null && PecaPassant.Cor != Cor)
+                    if ((PecaPassant != null && PecaPassant.Cor != Cor) && (PecaTabuleiroPassant == PecaPassant))
                     {
                         MovimentosPossiveis[PosicaoCaptura.Linha, PosicaoCaptura.Coluna] = true;
                     }
