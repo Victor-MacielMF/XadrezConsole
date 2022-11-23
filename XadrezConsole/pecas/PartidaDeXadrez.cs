@@ -123,13 +123,41 @@ namespace XadrezConsole.pecas
 
         private void ColocarPecas()
         {
-            InserirNovaPeca("H7", new Torre(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("D1", new Rei(Cor.Branca, Tabuleiro));
-            InserirNovaPeca("C1", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("A1", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("B1", new Cavalo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C1", new Bispo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D1", new Dama(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E1", new Rei(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("F1", new Bispo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("G1", new Cavalo(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("H1", new Torre(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("A2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("B2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("C2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("D2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("E2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("F2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("G2", new Peao(Cor.Branca, Tabuleiro));
+            InserirNovaPeca("H2", new Peao(Cor.Branca, Tabuleiro));
 
-            InserirNovaPeca("B8", new Torre(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("A8", new Rei(Cor.Preta, Tabuleiro));
-            InserirNovaPeca("D4", new Bispo(Cor.Branca, Tabuleiro));
+
+
+            InserirNovaPeca("A8", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("B8", new Cavalo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("C8", new Bispo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D8", new Dama(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("E8", new Rei(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("F8", new Bispo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("G8", new Cavalo(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("H8", new Torre(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("A7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("B7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("C7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("D7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("E7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("F7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("G7", new Peao(Cor.Preta, Tabuleiro));
+            InserirNovaPeca("H7", new Peao(Cor.Preta, Tabuleiro));
 
         }
 

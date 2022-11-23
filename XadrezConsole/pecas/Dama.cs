@@ -25,10 +25,10 @@ namespace XadrezConsole.pecas
             //Movimentos Torre + Bisbo
             int[,] TodosMovimentosPecaDois = new int[8, 2]
             {
-                { PosicaoAtual.Linha - 2, PosicaoAtual.Coluna }, { PosicaoAtual.Linha + 2, PosicaoAtual.Coluna },// Cima - Baixo
-                { PosicaoAtual.Linha, PosicaoAtual.Coluna + 2 }, { PosicaoAtual.Linha, PosicaoAtual.Coluna - 2 },// Direita - Esquerda
-                { PosicaoAtual.Linha - 2, PosicaoAtual.Coluna + 2 }, { PosicaoAtual.Linha + 2, PosicaoAtual.Coluna + 2 },//NE - SE
-                { PosicaoAtual.Linha + 2, PosicaoAtual.Coluna - 2 }, { PosicaoAtual.Linha - 2, PosicaoAtual.Coluna - 2 } //SO - NO
+                { PosicaoAtual.Linha - 1, PosicaoAtual.Coluna }, { PosicaoAtual.Linha + 1, PosicaoAtual.Coluna },// Cima - Baixo
+                { PosicaoAtual.Linha, PosicaoAtual.Coluna + 1 }, { PosicaoAtual.Linha, PosicaoAtual.Coluna - 1 },// Direita - Esquerda
+                { PosicaoAtual.Linha - 1, PosicaoAtual.Coluna + 1 }, { PosicaoAtual.Linha + 1, PosicaoAtual.Coluna + 1 },//NE - SE
+                { PosicaoAtual.Linha + 1, PosicaoAtual.Coluna - 1 }, { PosicaoAtual.Linha - 1, PosicaoAtual.Coluna - 1 } //SO - NO
             };
 
             //Aqui estou verificando se a posição é valida e se o rei pode se mover para a posição.
@@ -49,10 +49,6 @@ namespace XadrezConsole.pecas
                 {
                     MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true;
 
-                    if (Tabuleiro.ExistePeca(Posicao))
-                    {
-                        break;
-                    }
 
                     //Este switch é para fazer a dama percorrer todos os caminhos, caso o if acima não o faça parar.
                     switch (i)
