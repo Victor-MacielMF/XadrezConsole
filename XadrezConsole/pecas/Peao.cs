@@ -13,7 +13,7 @@ namespace XadrezConsole.pecas
             Posicao PosicaoMovimento = new Posicao(0, 0);
             Posicao PosicaoCaptura = new Posicao(0, 0);
 
-            int[,] TodosMovimentosPadrao = new int[4,2]
+            int[,] TodosMovimentosPadrao = new int[4, 2]
             {
                 {PosicaoAtual.Linha - 1, PosicaoAtual.Coluna }, // inicio de jogo branca 
                 {PosicaoAtual.Linha - 2, PosicaoAtual.Coluna }, //Inicio de  jogo branca dupla
@@ -22,7 +22,7 @@ namespace XadrezConsole.pecas
                 {PosicaoAtual.Linha + 2, PosicaoAtual.Coluna } //Inicio de  jogo Preta dupla
             };
 
-            int[,] TodosMovimentosCaptura = new int[4,2]
+            int[,] TodosMovimentosCaptura = new int[4, 2]
             {
                 {PosicaoAtual.Linha - 1, PosicaoAtual.Coluna -1}, //Tem peca inimiga à esquerda da branca
                 {PosicaoAtual.Linha - 1, PosicaoAtual.Coluna + 1}, // Tem peca inimiga à direita da branca
@@ -46,8 +46,9 @@ namespace XadrezConsole.pecas
                 {
                     pecaCaptura = Tabuleiro.PosicaoTabuleiro(PosicaoCaptura);
                 }
-
-                if(Tabuleiro.PosicaoValida(PosicaoMovimento) && !Tabuleiro.ExistePeca(PosicaoMovimento) && MovimentoRestringido == false)
+                //Verifica se a quantidade de movimentos é superior a um, para bloquear junto
+                if (Tabuleiro.PosicaoValida(PosicaoMovimento) && !Tabuleiro.ExistePeca(PosicaoMovimento)  && 
+                    PrimeiroMovimentoEspecial(i, BrancaOuPreta) && MovimentoRestringido == false)
                 {
                     MovimentosPossiveis[PosicaoMovimento.Linha, PosicaoMovimento.Coluna] = true;
                 }
@@ -56,7 +57,7 @@ namespace XadrezConsole.pecas
                     MovimentoRestringido = true;
                 }
 
-                if(Tabuleiro.PosicaoValida(PosicaoCaptura) && pecaCaptura != null && pecaCaptura.Cor != Cor)
+                if (Tabuleiro.PosicaoValida(PosicaoCaptura) && pecaCaptura != null && pecaCaptura.Cor != Cor)
                 {
                     MovimentosPossiveis[PosicaoCaptura.Linha, PosicaoCaptura.Coluna] = true;
                 }
@@ -66,6 +67,10 @@ namespace XadrezConsole.pecas
 
         }
 
+        private bool PrimeiroMovimentoEspecial(int index, int[] BrancaOuPreta)
+        {
+            return (index == BrancaOuPreta[0] || (QteMovimentos == 0 && index == BrancaOuPreta[1]));
+        }
         public override string ToString()
         {
             return "P";

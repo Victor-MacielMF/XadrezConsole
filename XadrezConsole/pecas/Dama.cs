@@ -49,6 +49,10 @@ namespace XadrezConsole.pecas
                 {
                     MovimentosPossiveis[Posicao.Linha, Posicao.Coluna] = true;
 
+                    if (Tabuleiro.ExistePeca(Posicao))
+                    {
+                        break;
+                    }
 
                     //Este switch é para fazer a dama percorrer todos os caminhos, caso o if acima não o faça parar.
                     switch (i)
