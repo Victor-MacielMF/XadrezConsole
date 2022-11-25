@@ -1,11 +1,13 @@
-## Olá pessoal
+## OlÃ¡ pessoal
 
 <! -- 
 
-Este é um projeto para práticar os conceitos da linguagem c# que estou aprendendo, já que estou migrando do PHP... tecnologia na qual me aprofundei durante os últimos 5 anos.
+Este Ã© um projeto para prÃ¡ticar os conceitos da linguagem c# que estou aprendendo, jÃ¡ que estou migrando do PHP... tecnologia na qual me aprofundei durante os Ãºltimos 5 anos.
 
-Em breve, terão novas instruções para rodar o projeto e a descrição de suas funcionalidades.
+Em breve, terÃ£o novas instruÃ§Ãµes para rodar o projeto e a descriÃ§Ã£o de suas funcionalidades.
 
-Até logo :D
+AtÃ© logo :D
+
+Trabalhos futuros = Adicionar opÃ§Ãµes na promoÃ§Ã£o ao invÃ©s de promover diretamente para dama.
 
 -- >
